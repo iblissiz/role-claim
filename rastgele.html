@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastgele RP Rolü Seçici</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        #rol { margin-top: 20px; font-size: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Rastgele RP Rolü Seçici</h1>
+    <button onclick="rastgeleRolSec()">Rastgele Rol Al</button>
+    <p id="rol"></p>
+    
+    <script>
+        let roller = [
+            "Hırsız", "Büyücü", "Ejderha Muhafızı", "Kral/Prens", "Büyücüler Konseyinden Bir Temsilci", 
+            "Ejderha Avcısı", "Kehanet Taşıyıcısı", "Paralı Asker Kaptanı", "Ejderha Kültisti", "Lanetli Şövalye", 
+            "Simyacı", "Gölgelerin Casusu", "Ejderha Yavrusu", "Yasak Bilginin Koruyucusu", "Ejderha Binicisi Efsanesi", 
+            "Ejderha Avcısı Loncasının Lideri", "Kutsal Mızrağın Sahibi", "Kaçak Prenses/Prens", "Eski Bir Ejderhanın Ruhunu Taşıyan Biri", 
+            "Karanlık Elf Büyücü", "Kadim Kitapların Bekçisi", "Eski Bir Savaşın Hayatta Kalanı", "Bilinmeyen Diyarların Gezgin Ruhbanı", 
+            "Efsanevi Canavar Avcısı", "Kaçak Büyücü Çırağı"
+        ];
+        
+        function rastgeleRolSec() {
+            if (roller.length === 0) {
+                document.getElementById("rol").innerText = "Tüm roller dağıtıldı!";
+                return;
+            }
+            let rastgeleIndex = Math.floor(Math.random() * roller.length);
+            let secilenRol = roller.splice(rastgeleIndex, 1)[0];
+            document.getElementById("rol").innerText = "Rolünüz: " + secilenRol;
+        }
+    </script>
+</body>
+</html>
