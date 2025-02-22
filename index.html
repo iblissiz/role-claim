@@ -8,12 +8,18 @@
         body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
         button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
         #rol { margin-top: 20px; font-size: 20px; font-weight: bold; }
+        input { padding: 5px; font-size: 16px; margin-bottom: 10px; }
+        #rollerListesi { margin-top: 30px; font-size: 18px; font-weight: normal; }
     </style>
 </head>
 <body>
     <h1>Rastgele RP Rolü Seçici</h1>
+    <input type="text" id="playerName" placeholder="İsminizi girin">
     <button onclick="rastgeleRolSec()">Rastgele Rol Al</button>
     <p id="rol"></p>
+    
+    <h2>Alınan Roller:</h2>
+    <ul id="rollerListesi"></ul>
     
     <script>
         let roller = [
@@ -25,14 +31,32 @@
             "Efsanevi Canavar Avcısı", "Kaçak Büyücü Çırağı"
         ];
         
+        let verilenRoller = {};
+        
         function rastgeleRolSec() {
+            let playerName = document.getElementById("playerName").value.trim();
+            if (!playerName) {
+                alert("Lütfen isminizi girin!");
+                return;
+            }
+            if (verilenRoller[playerName]) {
+                document.getElementById("rol").innerText = "Zaten bir rol aldınız: " + verilenRoller[playerName];
+                return;
+            }
             if (roller.length === 0) {
                 document.getElementById("rol").innerText = "Tüm roller dağıtıldı!";
                 return;
             }
             let rastgeleIndex = Math.floor(Math.random() * roller.length);
             let secilenRol = roller.splice(rastgeleIndex, 1)[0];
-            document.getElementById("rol").innerText = "Rolünüz: " + secilenRol;
+            verilenRoller[playerName] = secilenRol;
+            document.getElementById("rol").innerText = playerName + " için rolünüz: " + secilenRol;
+
+            // Roller listesine ekleme
+            let rollerListesi = document.getElementById("rollerListesi");
+            let yeniRol = document.createElement("li");
+            yeniRol.innerText = playerName + " - " + secilenRol;
+            rollerListesi.appendChild(yeniRol);
         }
     </script>
 </body>
